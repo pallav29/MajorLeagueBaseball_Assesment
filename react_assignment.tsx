@@ -79,7 +79,12 @@ with a random value between 0 and 1).
 "$60.00".
 ● Use TypeScript for type safety and include a cleanup mechanism.*/
 
-/* Solution*/
+/* Solution 2:
+
+Approach:
+We created a working component that takes basePrice and demandFactor, and re-calculates the final price every 5 seconds.
+We periodically generate a random demand factor by using setInterval, and utilize useEffect for setup and cleanup.*/
+
 interface TicketPriceProps {
   basePrice: number;
   demandFactor: number;
@@ -113,7 +118,12 @@ if none.
 ● Example: queue.addSeat("A1"); queue.addSeat("A2"); queue.reserveSeat(); //
 returns "A1".*/
 
-/* Solution*/
+/* Solution 3:
+
+Approach:
+We implement a queue data structure with a singly linked list for O(1) enqueue and dequeue operations. 
+The addSeat, reserveSeat, and getAvailableCount methods support seat management and tracking in constant time.*/
+
 class ListNode {
   seatId: string;
   next: ListNode | null = null;
@@ -172,7 +182,12 @@ return (
 // Usage: <TicketsList tickets={[{name: "GA", price: 20}, {name: "VIP",
 price: 50}]} />*/
 
-/* Solution*/
+/* Solution 4:
+
+Approach:
+We refactored a dirty ticket list component into a clean, typed functional component. 
+It uses brief props typing and has a key prop to render a list for readability and maintainability.*/
+
 interface Ticket {
   name: string;
   price: number;
@@ -206,7 +221,12 @@ tickets.
 with minPrice=20 returns [{id: "2", price: 30}].
 ● Include a brief explanation of your approach.*/
 
-/* Solution*/
+/* Solution 5:
+
+Approach:
+We created a custom hook for filtering tickets by price range through useMemo. 
+It has setters for minPrice and maxPrice to allow dynamic filtering with performance optimization through memoization.*/
+
 interface FilterTicket {
   id: string;
   price: number;
