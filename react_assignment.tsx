@@ -1,8 +1,12 @@
-// 1. Discuss one or more common design pattern used in React development
+/* Question 1. Discuss one or more common design pattern used in React development
+-Briefly explain the pattern and its purpose
+-A code example demonstrating how the pattern is implemented
+-The advantage and disadvantages of using the pattern.*/
 
-// Custom Hook Pattern is a way to encapsulate the logic of a component in a reusable function. 
-// Custom Hooks are JavaScript functions that leverage the Hooks that React provides (useState, useEffect, useContext, etc.) 
-// and can be shared across components to streamline the capture and reuse of logic.
+/*Solution 1:
+Custom Hook Pattern is a way to encapsulate the logic of a component in a reusable function. 
+Custom Hooks are JavaScript functions that leverage the Hooks that React provides (useState, useEffect, useContext, etc.) 
+and can be shared across components to streamline the capture and reuse of logic. */
 
 import {
 useState,useEffect,useMemo
@@ -12,8 +16,8 @@ AxiosResponse,AxiosError
 } from 'axios' ;
 import React from 'react' ;
 
-// Using TypeScript and React – below is an example of a Custom Hook that makes a generic HTTP Request. 
-// This Hook takes care of the logic to perform the request and deal with the load status, data and errors.
+/*Using TypeScript and React – below is an example of a Custom Hook that makes a generic HTTP Request. 
+This Hook takes care of the logic to perform the request and deal with the load status, data and errors.*/
 
 type ApiResponse<T> = {
   data: T | null;
@@ -55,10 +59,27 @@ function ExampleComponent() {
   return <div>{data.name}</div>;
 }
 
-// 2. Creative Problem Solving: "Dynamic Ticket Pricing"
-// A React component that displays ticket prices that adjust dynamically based on demand.
-// It takes a basePrice and demandFactor, calculates the price, and updates every 5 seconds.
+/*Advantages
+Promotes code reuse by encapsulating reusable logic in separate functions.
+Facilitates code readability and build-up by separating the logic from the component.
+Improves testability by enabling more focused and accurate unit tests on the logic wrapped by Custom Hooks.
 
+Disadvantages
+Can introduce additional complexity when abused and too many Custom Hooks are created.
+Requires a good understanding of React and Hooks concepts to implement them properly.*/
+
+/* Question 2. Creative Problem Solving: "Dynamic Ticket Pricing"
+You’re building a React component to display ticket prices that adjust dynamically based on
+demand. Write a functional React component TicketPrice that:
+● Takes a prop basePrice (number) and demandFactor (number between 0 and 1).
+● Calculates the final price as basePrice * (1 + demandFactor).
+● Updates the displayed price every 5 seconds with a new demandFactor (simulate this
+with a random value between 0 and 1).
+● Example: <TicketPrice basePrice={50} demandFactor={0.2} /> initially shows
+"$60.00".
+● Use TypeScript for type safety and include a cleanup mechanism.*/
+
+/* Solution*/
 interface TicketPriceProps {
   basePrice: number;
   demandFactor: number;
@@ -81,10 +102,18 @@ const TicketPrice: React.FC<TicketPriceProps> = ({basePrice, demandFactor})=>{
   return <div>${finalPrice.toFixed(2)}</div>;
 };
 
-// 3. Data Structures / Algorithms: "Seat Availability Queue"
-// Implement a TypeScript class SeatQueue to manage available seats in a venue using a queue-like structure.
-// Supports addSeat, reserveSeat, getAvailableCount. Uses a linked list internally.
+/* Question 3. Data Structures / Algorithms: "Seat Availability Queue"
+Implement a TypeScript class SeatQueue to manage available seats in a venue using a
+queue-like structure. It should support:
+● addSeat(seatId: string): Add a seat to the queue.
+● reserveSeat(): string | null: Remove and return the next available seat, or null
+if none.
+● getAvailableCount(): number: Return the number of available seats.
+● Use a linked list internally for O(1) enqueue and dequeue operations.
+● Example: queue.addSeat("A1"); queue.addSeat("A2"); queue.reserveSeat(); //
+returns "A1".*/
 
+/* Solution*/
 class ListNode {
   seatId: string;
   next: ListNode | null = null;
@@ -126,9 +155,24 @@ class SeatQueue {
   }
 }
 
-// 4. Code Refactoring: "React Ticket List Cleanup"
-// Refactored to use TypeScript, prop interfaces, and clean structure with unique keys.
+/*4. Code Refactoring: "React Ticket List Cleanup"
+Below is a messy React component for displaying a list of tickets. Refactor it into cleaner,
+more maintainable code using TypeScript. Add comments explaining your improvements.
+javascript
 
+function TicketsList(props) {
+const tickets = props.tickets;
+return (
+<div>
+<h1>Tickets</h1>
+{tickets.map(t => <div>{t.name} - ${t.price}</div>)}
+</div>
+);
+}
+// Usage: <TicketsList tickets={[{name: "GA", price: 20}, {name: "VIP",
+price: 50}]} />*/
+
+/* Solution*/
 interface Ticket {
   name: string;
   price: number;
@@ -151,10 +195,18 @@ const TicketsList: React.FC<TicketsListProps>=({tickets})=>{
   );
 };
 
-// 5. Language Fluency: "React Filter Hook"
-// Write a custom hook useTicketFilter that filters tickets by price range.
-// It allows setting minPrice and maxPrice, and returns filtered results.
+/*5. Language Fluency: "React Filter Hook"
+Write a custom React hook useTicketFilter in TypeScript that filters a list of tickets based
+on a price range. The hook should:
+● Take an array of tickets ({ id: string, price: number }[]) and return filtered
+tickets.
 
+● Provide controls to set a minPrice and maxPrice filter.
+● Example: For tickets = [{id: "1", price: 10}, {id: "2", price: 30}], filtering
+with minPrice=20 returns [{id: "2", price: 30}].
+● Include a brief explanation of your approach.*/
+
+/* Solution*/
 interface FilterTicket {
   id: string;
   price: number;
